@@ -8,6 +8,12 @@ CREATE TABLE users (
   email TEXT
 )
 
+CREATE TABLE user_secrets (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id),
+  secret_data TEXT
+);
+
 
 
 INSERT INTO users (id, username, password, email) VALUES (uuid_generate_v4(), 'victim1', 'victim1pass', 'victim1@pentest.com');
@@ -15,11 +21,7 @@ INSERT INTO users (id, username, password, email) VALUES (uuid_generate_v4(), 'v
 INSERT INTO users (id, username, password, email) VALUES (uuid_generate_v4(), 'admin', 'adminpass', 'admin@pentest.com');
 
 -- Tabel data rahasia user untuk simulasi IDOR
-CREATE TABLE user_secrets (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID REFERENCES users(id),
-  secret_data TEXT
-);
+
 
 -- Data dummy user_secrets
 

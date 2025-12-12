@@ -16,8 +16,8 @@ exports.login = async (username, password) => {
 };
 
 exports.getUserById = async (id) => {
-  // Vulnerable query (no auth)
-  const query = `SELECT * FROM users WHERE id = ${id}`;
-  const result = await pool.query(query);
+  // SECURE: Using Parameterized Query ($1)
+  const query = 'SELECT * FROM users WHERE id = $1';
+  const result = await pool.query(query, [id]);
   return result.rows[0];
 };
