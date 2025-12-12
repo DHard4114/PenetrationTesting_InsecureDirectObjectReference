@@ -8,6 +8,13 @@ const pool = require('../config/db');
 //   return result.rows[0];
 // };
 
+// exports.getUserById = async (id) => {
+//   // Vulnerable query (no auth)
+//   const query = `SELECT * FROM users WHERE id = ${id}`;
+//   const result = await pool.query(query);
+//   return result.rows[0];
+// };
+
 exports.login = async (username, password) => {
   // SECURE: Using Parameterized Query ($1, $2)
   const query = 'SELECT * FROM users WHERE username = $1 AND password = $2';
@@ -16,7 +23,10 @@ exports.login = async (username, password) => {
 };
 
 exports.getUserById = async (id) => {
+<<<<<<< HEAD
   // SECURE: Using Parameterized Query ($1)
+=======
+>>>>>>> 4c4cdd058d3489f615113d2ca13ee91525c16df6
   const query = 'SELECT * FROM users WHERE id = $1';
   const result = await pool.query(query, [id]);
   return result.rows[0];
